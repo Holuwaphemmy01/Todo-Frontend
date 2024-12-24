@@ -36,8 +36,11 @@ const RegisterForm = ({ closeForm, openLogin }) => {
   try{
       const response = await axios.post('http://localhost:8085/to-do-app/register', payload);
 
-      if(response.status === 200){
+      if(response.data === 'Registered Successfully'){
         openLogin();
+      }
+      else{
+        setError(response.data);
       }
 
   }catch (error){
@@ -61,16 +64,16 @@ const RegisterForm = ({ closeForm, openLogin }) => {
 
         <form onSubmit={handleSubmit}>
           <label htmlFor="firstName">First Name</label>
-          <input type="text" id="firstName" placeholder="Enter your first name" onChange={handleInputChange} required/>
+          <input type="text" id="firstName" name='firstName' placeholder="Enter your first name" value={formData.firstName} onChange={handleInputChange} required/>
 
           <label htmlFor="lastName">Last Name</label>
-          <input type="text" id="lastName" placeholder="Enter your last name" onChange={handleInputChange} required/>
+          <input type="text" id="lastName" name='lastName' placeholder="Enter your last name" value={formData.lastName} onChange={handleInputChange} required/>
 
           <label htmlFor="userName">Username</label>
-          <input type="text" id="userName" placeholder="Enter your username" onChange={handleInputChange} required/>
+          <input type="text" id="userName" name='userName' placeholder="Enter your username" value={formData.userName}  onChange={handleInputChange} required/>
 
           <label htmlFor="password">Password</label>
-          <input type="password" id="password" placeholder="Create a password" onChange={handleInputChange} required/>
+          <input type="password" id="password"  name='password' placeholder="Create a password" value={formData.password}  onChange={handleInputChange} required/>
 
           <p>
             Already have an account?{' '}
