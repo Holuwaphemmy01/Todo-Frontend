@@ -7,7 +7,7 @@ const Header = ({ openLogin, openRegister }) => {
     <header className="header">
       <div className="logo">
         <span className="circle">A</span>
-        <span className="site-name">Akinzo Todo App</span>
+        <span className="site-name">Todo App</span>
       </div>
       <nav>
         <button id='LoginAndRegister' onClick={openLogin}>Login</button>
