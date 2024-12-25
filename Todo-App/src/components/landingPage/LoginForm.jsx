@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios'
 import '../../styles/landingPage/form.css';
 
 
@@ -27,7 +28,7 @@ const LoginForm = ({ closeForm, openRegister, onLoginSuccess }) => {
         <span className="close" onClick={closeForm}>&times;</span>
         <h2 className='login'>Login</h2>
         <form className='formPage'>
-          <label htmlFor="username">username </label>
+          <label htmlFor="username">Username </label>
           <input 
             type="text" 
             id="username" 
