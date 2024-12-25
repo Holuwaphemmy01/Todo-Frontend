@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 // import { Routes, Route } from 'react-router-dom';
 // import LandingPage from './components/landingPage/LandingPage';
 import LandingPage from './components/landingPage/LandingPage';
@@ -12,7 +13,14 @@ import LandingPage from './components/landingPage/LandingPage';
           //   {/* <Route path="/dashboard" element={<Dashboard />} /> */}
           // </Routes>
         
-          <LandingPage/>
+          // <LandingPage/>
+          <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+      
+      </Routes>
+    </Router>
     );
   };
 
