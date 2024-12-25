@@ -1,14 +1,16 @@
 import React from 'react';
+import CurrentTime from './CurrentTime';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/dashboard/headerDashboard.css';
 
 
 
-const Header = ({ currentTime, onLogout }) => {
+const Header = ({ currentTime, onLogout, onLoginSuccess}) => {
 
   const navigate = useNavigate();
 
   const handleLogout =()=>{
+    onLoginSuccess('')
     navigate('/');
   };
   return (
@@ -18,8 +20,10 @@ const Header = ({ currentTime, onLogout }) => {
         <span className="site-name">Todo App</span>
       </div>
       <nav className="header-nav">
-        <div className="time-display">{currentTime}</div>
-        <button onClick={handleLogout} className="logout-button">Log Out</button>
+         <div className="time-container">
+              <CurrentTime className="time-display" />
+         </div>
+      <button onClick={handleLogout} className="logout-button">Log Out</button>
       </nav>
     </header>
   );

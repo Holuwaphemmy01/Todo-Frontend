@@ -42,11 +42,13 @@
     align-items: center;
   }
   
-  .time-display {
-    margin-right: 40px;
-    font-size: 16px;
+  
+
+  .time-container {
+    flex-grow: 1; 
+    display: flex;
+    justify-content: center;
     font-weight: bold;
-    color: #333333;
   }
   
   .logout-button {
