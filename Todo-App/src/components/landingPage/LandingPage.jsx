@@ -13,7 +13,7 @@ const LandingPage =()=> {
     const [showLogin, setShowLogin] = useState(false);
     const [showRegister, setShowRegister] = useState(false);
     const [username, setUsername] = useState('');
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
   
     const openLogin = () => {
       setShowRegister(false);
@@ -29,6 +29,11 @@ const LandingPage =()=> {
       setShowLogin(false);
       setShowRegister(false);
     };
+
+    const onLoginSuccess =(username) =>{
+      setUsername(username);
+      navigate('/dashboard')
+    }
   
     return (
       <div className='landingPage'>
@@ -37,7 +42,7 @@ const LandingPage =()=> {
         {showLogin && (
           <div className='modal'>
             <div  className='modal-content'>
-              <LoginForm closeForm={closeForm} openRegister={openRegister} />
+              <LoginForm closeForm={closeForm} openRegister={openRegister}  onLoginSuccess={onLoginSuccess}/>
             </div>
           </div>
         )}

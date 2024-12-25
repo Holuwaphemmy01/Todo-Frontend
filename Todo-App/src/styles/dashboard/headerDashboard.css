@@ -1,0 +1,65 @@
+.headerDashboard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color:#bcbcbc;
+    width: 100%;
+    color: black;
+    border-bottom: 1px solid #ccc;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  
+  
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo .circle {
+    width: 30px;
+    height: 30px;
+    background-color: #ff7f50;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .site-name {
+    margin-left: 10px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .header-nav {
+    display: flex;
+    align-items: center;
+  }
+  
+  .time-display {
+    margin-right: 40px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333333;
+  }
+  
+  .logout-button {
+    padding: 8px 10px;
+    margin-right: 30px;
+    background-color: #e53935;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .logout-button:hover {
+    background-color: #d32f2f;
+  }
+  
