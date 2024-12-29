@@ -34,7 +34,7 @@ const RegisterForm = ({ closeForm, openLogin }) => {
 
   
   try{
-      const response = await axios.post('http://localhost:8085/to-do-app/register', payload);
+      const response = await axios.post('http://localhost:8083/to-do-app/register', payload);
 
       if(response.data === 'Registered Successfully'){
         openLogin();

@@ -32,7 +32,7 @@ const LandingPage =()=> {
 
     const onLoginSuccess =(username) =>{
       setUsername(username);
-      navigate('/dashboard')
+      navigate('/dashboard', {state:{username}} );
     }
   
     return (

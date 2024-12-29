@@ -19,18 +19,23 @@ const TaskItem = ({ task, onToggleComplete, onEditTask, onDeleteTask }) => {
       }}
     >
       <h3 style={{ margin: "0 0 5px 0", color: "#000" }}>{task.title}</h3>
+      <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+        <span style={{ fontSize: "14px", color: "#333" }}>
+          <b>Task Id:</b> {task.id}
+        </span>
+      </div>
       <p style={{ margin: "0 0 10px 0", color: "#555", fontSize: "14px" }}>
         <b style={{ color: "black" }}>Description: </b>
         {task.description}
       </p>
       <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
         <span style={{ fontSize: "14px", color: "#333" }}>
-          <b>Start Date:</b> {task.startDate || "N/A"}
+          <b>Start Date:</b> {task.startDate}
         </span>
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
         <span style={{ fontSize: "14px", color: "#333" }}>
-          <b>Due Date:</b> {task.dueDate || "N/A"}
+          <b>Due Date:</b> {task.dueDate}
         </span>
       </div>
       <div

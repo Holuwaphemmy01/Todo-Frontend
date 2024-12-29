@@ -10,8 +10,11 @@ const Header = ({ currentTime, onLogout, onLoginSuccess}) => {
   const navigate = useNavigate();
 
   const handleLogout =()=>{
-    onLoginSuccess('')
-    navigate('/');
+    navigate('/', {});
+    console.log(onLoginSuccess)
+    // onLoginSuccess('')
+    // console("logout"+onLoginSuccess);
+
   };
   return (
     <header className="headerDashboard">

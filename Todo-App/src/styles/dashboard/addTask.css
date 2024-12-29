@@ -1,0 +1,25 @@
+.taskList {
+    margin: 20px;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+
+  .task-form input, .task-form select, .task-form button {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+  }
+  
+
+
+  .date-input-container {
+    position: relative;
+  }
+  
+  .title{
+    width: 100px;
+  }
+  

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import {IDLE_NAVIGATION, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import '../../styles/landingPage/form.css';
 
 
@@ -18,25 +18,13 @@ const LoginForm = ({ closeForm, openRegister, onLoginSuccess }) => {
       e.preventDefault();
 
       try{
-        const response = await axios.post( 'http://localhost:8085/to-do-app/login', {username, password});
-        // if (response.data === username){
-        //   const currentLoggedInUser = response.data;
-        //   onLoginSuccess(currentLoggedInUser)
-        //   navigate('/dashboard');
-        //   console.log(response.data);
-        // }
-        // else{
-        //   setError('Inavlid username or password');
-        // }
-
+        const response = await axios.post( 'http://localhost:8083/to-do-app/login', {username, password});
         if(response.data !== username){
           setError('Invalid username or password');
         }
         else{
           const currentLoggedInUser = response.data;
           onLoginSuccess(currentLoggedInUser);
-          // navigate('/dashboard');
-          console.log(response.data)
         }
       }
       catch(error){
