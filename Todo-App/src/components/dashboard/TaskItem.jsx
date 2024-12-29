@@ -21,7 +21,7 @@ const TaskItem = ({ task, onToggleComplete, onEditTask, onDeleteTask }) => {
       <h3 style={{ margin: "0 0 5px 0", color: "#000" }}>{task.title}</h3>
       <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
         <span style={{ fontSize: "14px", color: "#333" }}>
-          <b>Task Id:</b> {task.id}
+          <b>Task Id:</b> {task.taskId}
         </span>
       </div>
       <p style={{ margin: "0 0 10px 0", color: "#555", fontSize: "14px" }}>
@@ -49,17 +49,17 @@ const TaskItem = ({ task, onToggleComplete, onEditTask, onDeleteTask }) => {
         <FaCheckCircle
           style={{ color: "green", cursor: "pointer" }}
           title="Mark as completed"
-          onClick={() => onToggleComplete(task.id)}
+          onClick={() => onToggleComplete(task.taskId)}
         />
         <FaEdit
           style={{ color: "blue", cursor: "pointer" }}
           title="Edit Task"
-          onClick={() => onEditTask(task.id)}
+          onClick={() => onEditTask(task.taskId, task.description)}
         />
         <FaTrash
           style={{ color: "red", cursor: "pointer" }}
           title="Delete Task"
-          onClick={() => onDeleteTask(task.id)}
+          onClick={() => onDeleteTask(task.taskId)}
         />
       </div>
     </div>

@@ -1,24 +1,34 @@
 import React, { useState, useEffect } from "react";
+import { data, useLocation } from "react-router-dom";
+
 import axios from "axios";
 import TaskItem from "./TaskItem";
 
-const PendingTasks = ({ onTaskUpdated, onTaskDeleted }) => {
+const PendingTasks = ({ onTaskUpdated, onTaskDeleted, taskUpdated }) => {
   const [pendingTasks, setPendingTasks] = useState([]);
   const [editingTask, setEditingTask] = useState(null);
   const [newDescription, setNewDescription] = useState("");
   const [error, setError] = useState("");
+  const location = useLocation();
+  const username = location.state?.username;
+
 
 
   useEffect(() => {
     fetchPendingTasks();
   }, []);
 
+
+  useEffect(() => {
+    fetchPendingTasks();
+  }, [taskUpdated]);
+
+  
+
   const fetchPendingTasks = async () => {
     
     try {
-
-      const username = location.state?.username
-      const response = await axios.get(`/http://localhost:8083/to-do-app/pendingtasks/${username}`);
+      const response = await axios.get(`http://localhost:8083/to-do-app/pendingtasks/${username}`);
       setPendingTasks(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
       console.log("Error fetching pending tasks:", error);
@@ -26,37 +36,50 @@ const PendingTasks = ({ onTaskUpdated, onTaskDeleted }) => {
     }
   };
 
+
+
+
   const handleMarkAsCompleted = async (taskId, description) => {
     const username = location.state?.username 
     try {
       const payload = {
-            username: username,
-            taskId: taskId,
-            description: description,
-            completed:true
+           userName: username,
+            taskId,
+            description,
+            completed:true,
       };
-
-      await axios.put(`/http://localhost:8083/to-do-app/update`, payload);
+     const response =  await axios.put(`http://localhost:8083/to-do-app/update`, payload);
       fetchPendingTasks();
-      onTaskUpdated(); 
     } catch (error) {
       console.error("Error marking task as completed:", error);
     }
   };
 
+
+
+
+
   const handleDeleteTask = async (taskId) => {
     if (!window.confirm("Are you sure you want to delete this task?")) return;
 
+    const payload = {
+      taskId: taskId,
+      userId:username,
+    };
     try {
-      await axios.delete(`/api/tasks/${taskId}`);
+       await axios.delete(`http://localhost:8083/to-do-app/delete`, {data: payload});
       fetchPendingTasks(); 
-      onTaskDeleted(); 
     } catch (error) {
       console.error("Error deleting task:", error);
     }
   };
 
+
+
+
   const handleEditTask = (taskId, currentDescription) => {
+    console.log("Editing Task ID:", taskId);
+  console.log("Current Description:", currentDescription);
     setEditingTask(taskId);
     setNewDescription(currentDescription);
     setError("");
@@ -85,10 +108,10 @@ const PendingTasks = ({ onTaskUpdated, onTaskDeleted }) => {
         {pendingTasks.length > 0 ? (
            pendingTasks.map((task) => (
           <TaskItem
-            key={task.id}
+            key={task.taskId}
             task={task}
-            onToggleComplete={handleMarkAsCompleted}
-            onEditTask={() => handleEditTask(task.id, task.description)}
+            onToggleComplete={(taskId, description) => handleMarkAsCompleted(task.taskId, task.description)}
+            onEditTask={(taskId, description) => handleEditTask(task.id, task.description)}
             onDeleteTask={handleDeleteTask}
           />
         ))
