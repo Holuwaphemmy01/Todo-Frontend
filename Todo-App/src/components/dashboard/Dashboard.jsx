@@ -7,6 +7,7 @@ import AddTask from './AddTask';
 import PendingTasks from './PendingTasks';
 import CompletedTasks from './CompletedTask';
 import Footer from './Footer';
+import Quotes from './Quotes';
 import axios from "axios";
 import '../../styles/dashboard/dashboard.css'
 
@@ -47,9 +48,12 @@ const DashBoard = () => {
               <PendingTasks username={username} taskUpdated={taskUpdated} refreshCompletedTask={handleRefreshCompleteTask} />
             </div>
             <div>
-              <CompletedTasks   username={username} completedTasksUpdate={completedTasks}/>
+              <CompletedTasks    username={username} completedTasksUpdate={completedTasks}/>
             </div>
           <div style={{width:'100%'}}>
+            <div>
+                    <Quotes/>
+            </div>
             <Footer style={{bottom:'0'}}/>
           </div>
         </div>

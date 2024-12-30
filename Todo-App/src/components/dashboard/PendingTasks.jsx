@@ -117,6 +117,7 @@ const PendingTasks = ({ onTaskUpdated, onTaskDeleted, taskUpdated, taskCompleteU
         {pendingTasks.length > 0 ? (
            pendingTasks.map((task) => (
           <TaskItem
+
             key={task.taskId}
             task={task}
             onToggleComplete={(taskId, description) => handleMarkAsCompleted(task.taskId, task.description)}
@@ -134,7 +135,7 @@ const PendingTasks = ({ onTaskUpdated, onTaskDeleted, taskUpdated, taskCompleteU
         <div
           style={{
             position: "fixed",
-            top: "0",
+            top: "-30px",
             left: "0",
             width: "100vw",
             height: "100vh",

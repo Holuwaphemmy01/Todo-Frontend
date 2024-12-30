@@ -5,16 +5,17 @@ import TaskItem from "./TaskItem";
 
 const CompletedTasks = ({ onTaskDeleted, completedTasksUpdate}) => {
 const [completedTasks, setCompletedTasks] = useState([]);
-const username = useLocation.username;
+const location = useLocation();
+ const username = location.state?.username;
 
 
   useEffect(() => {
     fetchCompletedTasks();
   }, []);
 
-  // useEffect(() => {
-  //     fetchCompletedTasks();
-  //   }, [completedTasksUpdate]);
+  useEffect(() => {
+      fetchCompletedTasks();
+    }, [completedTasksUpdate]);
   
 
   const fetchCompletedTasks = async () => {
@@ -29,13 +30,28 @@ const username = useLocation.username;
     }
   };
 
+  // const handleDeleteTask = async (taskId) => {
+  //   if (!window.confirm("Are you sure you want to delete this task?")) return;
+
+  //   try {
+  //     await axios.delete(`/api/tasks/${taskId}`);
+  //     fetchCompletedTasks(); 
+  //     onTaskDeleted(); 
+  //   } catch (error) {
+  //     console.error("Error deleting task:", error);
+  //   }
+  // };
+
   const handleDeleteTask = async (taskId) => {
     if (!window.confirm("Are you sure you want to delete this task?")) return;
 
+    const payload = {
+      taskId: taskId,
+      userId:username,
+    };
     try {
-      await axios.delete(`/api/tasks/${taskId}`);
+       await axios.delete(`http://localhost:8083/to-do-app/delete`, {data: payload});
       fetchCompletedTasks(); 
-      onTaskDeleted(); 
     } catch (error) {
       console.error("Error deleting task:", error);
     }

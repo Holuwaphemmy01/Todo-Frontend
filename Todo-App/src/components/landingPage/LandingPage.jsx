@@ -4,6 +4,7 @@
  import Hero from './Hero';
  import LoginForm from './LoginForm';
  import RegisterForm from './RegisterForm';
+ import Quotes from '../dashboard/Quotes';
  import Footer from './Footer';
  import '../../styles/landingPage/landingPage.css'
 
