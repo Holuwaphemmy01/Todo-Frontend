@@ -4,7 +4,7 @@ import axios from "axios";
 
 import "../../styles/dashboard/addTask.css";
 
-const AddTask = ({ username, fetchPendingTasks, onTaskAdded }) => {
+const AddTask = ({ username,  onTaskAdded }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [dueDate, setDueDate] = useState("");
@@ -31,7 +31,6 @@ const AddTask = ({ username, fetchPendingTasks, onTaskAdded }) => {
       
 
       const response = await axios.post('http://localhost:8083/to-do-app/create-task', task);
-      console.log(response.data)
       if(response.data === 'Task added successfully'){
         onTaskAdded();
         setTitle("");
@@ -44,7 +43,6 @@ const AddTask = ({ username, fetchPendingTasks, onTaskAdded }) => {
       else{
         console.error("Error creating task: ", error);
       }
-      // if (fetchPendingTasks) fetchPendingTasks();
     } catch (error) {
       console.error("Error creating task: ", error);
       setError('Failed to create the task. Please try again.');

@@ -13,8 +13,8 @@ import '../../styles/dashboard/dashboard.css'
 
 
 const DashBoard = () => {
-    // const [completedTasks, setCompletedTasks] = useState([]);
-    // const [pendingTasks, setPendingTasks] = useState([]);
+    const [completedTasks, setCompletedTasks] = useState([]);
+    const [pendingTasks, setPendingTasks] = useState([]);
     const [taskUpdated, setTaskUpdated] = useState(false);
     const location = useLocation();
     const {username} = location.state;
@@ -23,9 +23,12 @@ const DashBoard = () => {
 
     const handleTaskAdded = () => {
       setTaskUpdated((prev) => !prev); 
-      console.log("Task updated:", !taskUpdated);
     };
     
+
+    const handleCompletedTasks = () =>{
+      setCompletedTasks((prev) => !prev);
+    }
 
 
     return(
@@ -42,10 +45,10 @@ const DashBoard = () => {
             </div>
           </div>
           <div>
-              <PendingTasks username={username} taskUpdated={taskUpdated}/>
+              <PendingTasks username={username} taskUpdated={taskUpdated} taskCompleteUpdate={handleCompletedTasks}/>
             </div>
             <div>
-              <CompletedTasks/>
+              <CompletedTasks username={username}  completedTasks={completedTasks}/>
             </div>
           <div style={{width:'100%'}}>
             <Footer style={{bottom:'0'}}/>

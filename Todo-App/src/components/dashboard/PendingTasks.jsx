@@ -4,7 +4,7 @@ import { data, useLocation } from "react-router-dom";
 import axios from "axios";
 import TaskItem from "./TaskItem";
 
-const PendingTasks = ({ onTaskUpdated, onTaskDeleted, taskUpdated }) => {
+const PendingTasks = ({ onTaskUpdated, onTaskDeleted, taskUpdated, taskCompleteUpdate  }) => {
   const [pendingTasks, setPendingTasks] = useState([]);
   const [editingTask, setEditingTask] = useState(null);
   const [newDescription, setNewDescription] = useState("");
@@ -22,6 +22,8 @@ const PendingTasks = ({ onTaskUpdated, onTaskDeleted, taskUpdated }) => {
   useEffect(() => {
     fetchPendingTasks();
   }, [taskUpdated]);
+
+
 
   
 
@@ -50,6 +52,7 @@ const PendingTasks = ({ onTaskUpdated, onTaskDeleted, taskUpdated }) => {
       };
      const response =  await axios.put(`http://localhost:8083/to-do-app/update`, payload);
       fetchPendingTasks();
+      taskCompleteUpdate();
     } catch (error) {
       console.error("Error marking task as completed:", error);
     }
