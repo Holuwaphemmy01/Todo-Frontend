@@ -24,12 +24,11 @@ const DashBoard = () => {
     const handleTaskAdded = () => {
       setTaskUpdated((prev) => !prev); 
     };
-    
 
-    const handleCompletedTasks = () =>{
-      setCompletedTasks((prev) => !prev);
+    const handleRefreshCompleteTask = () =>{
+      setCompletedTasks((prev) => !prev)
     }
-
+    
 
     return(
         <div className='dashboard-container'>
@@ -45,10 +44,10 @@ const DashBoard = () => {
             </div>
           </div>
           <div>
-              <PendingTasks username={username} taskUpdated={taskUpdated} taskCompleteUpdate={handleCompletedTasks}/>
+              <PendingTasks username={username} taskUpdated={taskUpdated} refreshCompletedTask={handleRefreshCompleteTask} />
             </div>
             <div>
-              <CompletedTasks username={username}  completedTasks={completedTasks}/>
+              <CompletedTasks   username={username} completedTasksUpdate={completedTasks}/>
             </div>
           <div style={{width:'100%'}}>
             <Footer style={{bottom:'0'}}/>

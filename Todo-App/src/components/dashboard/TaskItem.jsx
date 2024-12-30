@@ -54,7 +54,7 @@ const TaskItem = ({ task, onToggleComplete, onEditTask, onDeleteTask }) => {
         <FaEdit
           style={{ color: "blue", cursor: "pointer" }}
           title="Edit Task"
-          onClick={() => onEditTask(task.taskId, task.description)}
+          onClick={() => onEditTask(task.taskId,  task.description)}
         />
         <FaTrash
           style={{ color: "red", cursor: "pointer" }}

@@ -4,7 +4,7 @@ import { data, useLocation } from "react-router-dom";
 import axios from "axios";
 import TaskItem from "./TaskItem";
 
-const PendingTasks = ({ onTaskUpdated, onTaskDeleted, taskUpdated, taskCompleteUpdate  }) => {
+const PendingTasks = ({ onTaskUpdated, onTaskDeleted, taskUpdated, taskCompleteUpdate, refreshCompletedTask }) => {
   const [pendingTasks, setPendingTasks] = useState([]);
   const [editingTask, setEditingTask] = useState(null);
   const [newDescription, setNewDescription] = useState("");
@@ -52,7 +52,7 @@ const PendingTasks = ({ onTaskUpdated, onTaskDeleted, taskUpdated, taskCompleteU
       };
      const response =  await axios.put(`http://localhost:8083/to-do-app/update`, payload);
       fetchPendingTasks();
-      taskCompleteUpdate();
+      refreshCompletedTask();
     } catch (error) {
       console.error("Error marking task as completed:", error);
     }
@@ -81,8 +81,6 @@ const PendingTasks = ({ onTaskUpdated, onTaskDeleted, taskUpdated, taskCompleteU
 
 
   const handleEditTask = (taskId, currentDescription) => {
-    console.log("Editing Task ID:", taskId);
-  console.log("Current Description:", currentDescription);
     setEditingTask(taskId);
     setNewDescription(currentDescription);
     setError("");
@@ -95,7 +93,15 @@ const PendingTasks = ({ onTaskUpdated, onTaskDeleted, taskUpdated, taskCompleteU
     }
 
     try {
-        await axios.put(`/api/tasks/${editingTask}`, { description: newDescription });
+      const payload = {
+        userName: location.state?.username, 
+        taskId: editingTask,
+        completed: false,
+        description: newDescription, 
+      };
+
+        const response =await axios.put(`http://localhost:8083/to-do-app/update`, payload);
+        console.log(response.data)
         setEditingTask(null);
         setNewDescription("");
         fetchPendingTasks();
@@ -114,7 +120,7 @@ const PendingTasks = ({ onTaskUpdated, onTaskDeleted, taskUpdated, taskCompleteU
             key={task.taskId}
             task={task}
             onToggleComplete={(taskId, description) => handleMarkAsCompleted(task.taskId, task.description)}
-            onEditTask={(taskId, description) => handleEditTask(task.id, task.description)}
+            onEditTask={(taskId, description) => handleEditTask(task.taskId, task.description)}
             onDeleteTask={handleDeleteTask}
           />
         ))
@@ -176,4 +182,3 @@ const PendingTasks = ({ onTaskUpdated, onTaskDeleted, taskUpdated, taskCompleteU
 };
 
 export default PendingTasks;
-

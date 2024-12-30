@@ -3,24 +3,25 @@ import { data, useLocation } from "react-router-dom";
 import axios from "axios";
 import TaskItem from "./TaskItem";
 
-const CompletedTasks = ({ onTaskDeleted,  }) => {
+const CompletedTasks = ({ onTaskDeleted, completedTasksUpdate}) => {
 const [completedTasks, setCompletedTasks] = useState([]);
-const location = useLocation();
+const username = useLocation.username;
 
 
   useEffect(() => {
     fetchCompletedTasks();
   }, []);
 
-  useEffect(() => {
-      fetchCompletedTasks();
-    }, [completedTasks]);
+  // useEffect(() => {
+  //     fetchCompletedTasks();
+  //   }, [completedTasksUpdate]);
   
 
   const fetchCompletedTasks = async () => {
     try {
-      const username = location.state?.username 
+      
       const response = await axios.get(`http://localhost:8083/to-do-app/completedtasks/${username}`);
+      console.log(response.data);
       setCompletedTasks(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
       console.error("Error fetching completed tasks:", error);
